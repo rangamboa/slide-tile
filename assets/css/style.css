@@ -29,8 +29,6 @@ body {
     padding: 10px;
     min-width: 30%;
     min-height: 33%;
-    border: 3px solid lightslategrey;
-    border-radius: 10px;
     font-size: 50px;
     text-align: center;
     cursor: pointer;
@@ -40,15 +38,28 @@ body {
     background-color: lightsteelblue;
 }
 
+.blankTile {
+    border: none;
+}
+
+.numTile {
+    border: 2px solid lightslategrey;
+    border-radius: 10px;
+}
+
 #tile0:hover {
     background-color: white;
     cursor:default;
 }
 
-.blankTile {
-    border: none;
+#tileCard {
+    visibility: hidden;
 }
 
 h1, h6 {
     text-align: center;
+}
+
+button {
+    width: 100%;
 }

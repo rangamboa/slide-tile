@@ -1,13 +1,14 @@
 // Define variables.
 var tiles = [];
 var randomTiles = [];
+var tileGrid = $('#tileCard');
 var playBtn = $('#playButton');
 var tileEl = $('.tile');
-var tileZero;
 
-function playGame() {
+function initGame() {
 
-    console.log('playGame called.');
+    console.log('playGame() called.');
+    tileGrid.css('visibility', 'visible');
     playBtn.html('reshuffle!');
 
     tiles = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
@@ -22,29 +23,26 @@ function playGame() {
         j++;
 
     }
-
-    console.log(randomTiles);
-    console.log(tileEl);
     
-    // Assign IDs to tiles accordingly.
+    // Assign IDs to tiles, then display or hide accordingly.
     for (i = 0; i < randomTiles.length; i++) {
+
         tileEl[i].id = 'tile'+randomTiles[i];
         tileEl[i].innerText = randomTiles[i];
-        console.log(tileEl[i].innerText);
+
         tileString = '#tile'+i;
-        console.log(tileString);
-        $(tileString).addClass('tile');
+
+        $(tileString).addClass('numTile');
         $(tileString).removeClass('blankTile');
+
     }
 
-    // Remove "0" text from empty tile.
+    // Remove "0" text and border from empty tile.
     $('#tile0').text('');
+    $('#tile0').removeClass('numTile');
     $('#tile0').addClass('blankTile');
 
-
 }
-
-$('#tile0').addClass('blankTile');
 
 // Listen for click on play button.
 playBtn.on('click', function(event) {
@@ -53,6 +51,6 @@ playBtn.on('click', function(event) {
     event.preventDefault();
 
     // Call function to begin game.
-    playGame();
+    initGame();
 
 });
