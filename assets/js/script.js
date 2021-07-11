@@ -32,10 +32,10 @@ function playGame() {
         tileEl[i].innerText = randomTiles[i];
         console.log(tileEl[i].innerText);
         tileString = '#tile'+i;
+        console.log(tileString);
         $(tileString).addClass('tile');
+        $(tileString).removeClass('blankTile');
     }
-
-
 
     // Remove "0" text from empty tile.
     $('#tile0').text('');

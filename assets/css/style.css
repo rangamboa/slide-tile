@@ -3,6 +3,10 @@ body {
     font-family: Georgia, 'Times New Roman', Times, serif
 }
 
+.card-footer {
+    text-align: center;
+}
+
 
 .box {
     margin: 50px auto;
