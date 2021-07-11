@@ -34,7 +34,7 @@ function playGame() {
 
     }
 
-    // Remove "0" text from empty tile.
+    // Remove "0" text content from empty tile.
     $('#tile0').text('');
 
 
