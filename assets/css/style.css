@@ -5,6 +5,7 @@ body {
 
 
 .box {
+    margin: 50px auto;
     padding: 10px;
     display: flex;
     align-items: center;
@@ -17,15 +18,15 @@ body {
     justify-content: center;
     flex-wrap: wrap;
     width: 350px;
-    oborder: 1px dotted blue;
 }
 
 .tile {
-    margin: 0px;
+    margin: 5px;
     padding: 10px;
-    min-width: 33%;
+    min-width: 30%;
     min-height: 33%;
-    border: 1px dotted grey;
+    border: 3px solid lightslategrey;
+    border-radius: 10px;
     font-size: 50px;
     text-align: center;
     cursor: pointer;
@@ -35,10 +36,15 @@ body {
     background-color: lightsteelblue;
 }
 
-h1, h6 {
-    text-align: center;
+#tile0:hover {
+    background-color: white;
+    cursor:default;
 }
 
-.green {
-    background-color: green;
+.blankTile {
+    border: none;
+}
+
+h1, h6 {
+    text-align: center;
 }

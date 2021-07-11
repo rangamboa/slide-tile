@@ -31,14 +31,20 @@ function playGame() {
         tileEl[i].id = 'tile'+randomTiles[i];
         tileEl[i].innerText = randomTiles[i];
         console.log(tileEl[i].innerText);
-
+        tileString = '#tile'+i;
+        $(tileString).addClass('tile');
     }
+
+
 
     // Remove "0" text from empty tile.
     $('#tile0').text('');
+    $('#tile0').addClass('blankTile');
 
 
 }
+
+$('#tile0').addClass('blankTile');
 
 // Listen for click on play button.
 playBtn.on('click', function(event) {
