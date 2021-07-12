@@ -55,24 +55,33 @@ function checkMove(clickedTile) {
     clickedPos = randomTiles.indexOf(clickedTile);
     // console.log(clickedTile + ' has been clicked, with a position of '+ clickedPos);
 
-    // Generate possible moves for clicked position.
+    // Generate array of possible moves for clicked position.
     moveList = [[1, 3], [0, 2, 4], [1, 5], [0, 4, 6], [1, 3, 5, 7], [2, 4, 8], [3, 7], [4, 6, 8], [5, 7]]
     
     // console.log(moveList[clickedPos]);
     // console.log(moveList[clickedPos].length);
 
+    // Check each possible move.
     for (i = 0; i < moveList[clickedPos].length; i++) {
 
         move = moveList[clickedPos][i];
         // console.log(move);
         // console.log(randomTiles[move]);
 
-        if (randomTiles[move] == '0') console.log('valid move into position ' + moveList[clickedPos][i]);
-        else console.log('invalid move into position ' + moveList[clickedPos][i]);
+        // Move tile and rewrite array for display if move is valid.
+        if (randomTiles[move] == '0') {
+            console.log('valid move into position ' + move);
+            moveTile();
+        }
+        else {
+            console.log('invalid move into position ' + move);
+        }
     }
 }
 
-
+function moveTile() {
+    
+}
 
 // Listen for click on any number tile.
 tileEl.on('click', function(event) {
