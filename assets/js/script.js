@@ -7,9 +7,9 @@ var tileEl = $('.tile');
 
 function initGame() {
 
-    console.log('playGame() called.');
+    console.log('initGame() called.');
     tileGrid.css('visibility', 'visible');
-    playBtn.html('reshuffle!');
+    playBtn.html('reshuffle');
 
     tiles = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
     randomTiles = [];
@@ -42,7 +42,34 @@ function initGame() {
     $('#tile0').removeClass('numTile');
     $('#tile0').addClass('blankTile');
 
+    console.log('Random tile arrangement: ' + randomTiles);
+
 }
+
+function checkMove(clickedTile) {
+
+    console.log('\ncheckMove() called.');
+
+    clickedPos = randomTiles.indexOf(clickedTile.toString());
+
+    console.log(clickedTile + ' has been clicked, with a position of '+ clickedPos);
+
+
+}
+
+
+
+// Listen for click on any number tile.
+tileEl.on('click', function(event) {
+
+    // Extract number on tile.
+    clickedTile = event.target.textContent;
+
+    // Do nothing if the blank tile is checked; otherwise check if tile can move.
+    if (clickedTile == 0) return;
+    else checkMove(clickedTile);
+
+});
 
 // Listen for click on play button.
 playBtn.on('click', function(event) {
