@@ -1,10 +1,12 @@
 // Define variables.
 var tiles = [];
 var randomTiles = [];
-var moves = [];
+var moveList = [];
 var tileGrid = $('#tileCard');
 var playBtn = $('#playButton');
 var tileEl = $('.tile');
+var tempTile;
+var tempTiles = [];
 
 function initGame() {
 
@@ -12,6 +14,7 @@ function initGame() {
     tileGrid.css('visibility', 'visible');
     playBtn.html('reshuffle');
 
+    // Set initial tile arrangement.
     tiles = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
     randomTiles = [];
 
@@ -25,7 +28,22 @@ function initGame() {
 
     }
     
-    // Assign IDs to tiles, then display or hide accordingly.
+    // Set winning tile arrangement.
+    tiles = ['1', '2', '3', '4', '5', '6', '7', '8', '0'];
+
+    console.log('Initial random tile arrangement: ' + randomTiles);
+
+    // Call function to draw grid.
+    drawTiles();
+}
+
+function drawTiles() {
+
+    console.log('\ndrawTiles() called.');
+
+    console.log(randomTiles);
+    
+    // Assign IDs to tiles, then display number if not zero, else hide.
     for (i = 0; i < randomTiles.length; i++) {
 
         tileEl[i].id = 'tile'+randomTiles[i];
@@ -43,7 +61,7 @@ function initGame() {
     $('#tile0').removeClass('numTile');
     $('#tile0').addClass('blankTile');
 
-    console.log('Random tile arrangement: ' + randomTiles);
+    checkWin();
 
 }
 
@@ -56,7 +74,7 @@ function checkMove(clickedTile) {
     // console.log(clickedTile + ' has been clicked, with a position of '+ clickedPos);
 
     // Generate array of possible moves for clicked position.
-    moveList = [[1, 3], [0, 2, 4], [1, 5], [0, 4, 6], [1, 3, 5, 7], [2, 4, 8], [3, 7], [4, 6, 8], [5, 7]]
+    moveList = [[1, 3], [0, 2, 4], [1, 5], [0, 4, 6], [1, 3, 5, 7], [2, 4, 8], [3, 7], [4, 6, 8], [5, 7]];
     
     // console.log(moveList[clickedPos]);
     // console.log(moveList[clickedPos].length);
@@ -68,19 +86,35 @@ function checkMove(clickedTile) {
         // console.log(move);
         // console.log(randomTiles[move]);
 
-        // Move tile and rewrite array for display if move is valid.
+        // Call moveTile function if move is valid.
         if (randomTiles[move] == '0') {
             console.log('valid move into position ' + move);
             moveTile();
-        }
-        else {
+        } else {
             console.log('invalid move into position ' + move);
         }
     }
 }
 
 function moveTile() {
+
+    console.log('\nmoveTile() called.');
+
+    console.log('position to move from: ' + clickedPos);
+    console.log('position to move to: ' + move);
+
+    tempTile = randomTiles[clickedPos];
+    randomTiles[clickedPos] = randomTiles[move];
+    randomTiles[move] = tempTile;
     
+    // Redraw tiles.
+    drawTiles();
+
+}
+
+function checkWin() {
+
+    if (randomTiles == tiles) alert('you a win');    
 }
 
 // Listen for click on any number tile.

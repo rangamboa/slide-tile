@@ -36,6 +36,7 @@ body {
 
 .tile:hover {
     background-color: lightsteelblue;
+    filter: drop-shadow(3px 3px 3px #ccc);
 }
 
 .blankTile {
@@ -44,20 +45,27 @@ body {
 
 .numTile {
     border: 2px solid lightslategrey;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 #tile0:hover {
     background-color: white;
-    cursor:default;
+    cursor: default;
+    filter: none;
 }
 
 #tileCard {
     visibility: hidden;
 }
 
-h1, h6 {
+h1 {
+    margin-top:20px;
     text-align: center;
+}
+h6 {
+    margin-top:20px;
+    text-align: center;
+    font-style: italic;
 }
 
 button {
