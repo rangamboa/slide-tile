@@ -10,7 +10,7 @@ var tempTile;
 var tempTiles = [];
 var timeEl = $('#timeLapse');
 var timeNow = 0;
-var timePass;
+var timePass = 0;
 var startTime;
 var moveEl = $('#moveCount');
 var moveTotal = 0;
@@ -23,6 +23,9 @@ function initGame() {
     playBtn.html('reshuffle');
     timeEl.html('0s');
     moveEl.html('0');
+    timeNow = 0;
+    timePass = 0;
+    moveTotal = 0;
     clearInterval(startTime);
 
     // Set initial tile arrangement.
@@ -125,6 +128,7 @@ function moveTile() {
     randomTiles[move] = tempTile;
     
     // Start time elapsed if this is the first click on a new game.
+    console.log(timePass);
     if (timePass == 0) timePass = setInterval(startTime, 1000);
 
     // Increment move count.
