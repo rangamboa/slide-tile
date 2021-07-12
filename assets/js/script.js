@@ -18,10 +18,11 @@ var moveTotal = 0;
 function initGame() {
 
     console.log('initGame() called.');
+
     tileGrid.css('visibility', 'visible');
     message.html('click the tiles to put them in order');
     playBtn.html('reshuffle');
-    timeEl.html('0s');
+    timeEl.html('0');
     moveEl.html('0');
     timeNow = 0;
     timePass = 0;
@@ -45,8 +46,6 @@ function initGame() {
     // Set winning tile arrangement.
     tiles = ['1', '2', '3', '4', '5', '6', '7', '8', '0'];
 
-    console.log('Initial random tile arrangement: ' + randomTiles);
-
     // Call function to draw grid.
     drawTiles();
 }
@@ -55,7 +54,7 @@ function drawTiles() {
 
     console.log('\ndrawTiles() called.');
 
-    console.log(randomTiles);
+    // console.log(randomTiles);
     
     // Assign IDs to tiles, then display number if not zero, else hide.
     for (i = 0; i < randomTiles.length; i++) {
@@ -102,10 +101,10 @@ function checkMove(clickedTile) {
 
         // Call moveTile function if move is valid.
         if (randomTiles[move] == '0') {
-            console.log('valid move into position ' + move);
+            // console.log('valid move into position ' + move);
             moveTile();
         } else {
-            console.log('invalid move into position ' + move);
+            // console.log('invalid move into position ' + move);
         }
     }
 }
@@ -113,23 +112,24 @@ function checkMove(clickedTile) {
 function startTime() {
 
     timeNow++;
-    timeEl.html(timeNow + 's');
+    timeEl.html(timeNow);
 }
 
 function moveTile() {
 
     console.log('\nmoveTile() called.');
 
-    console.log('position to move from: ' + clickedPos);
-    console.log('position to move to: ' + move);
+    // console.log('position to move from: ' + clickedPos);
+    // console.log('position to move to: ' + move);
 
+    // Move selected array element into new position.
     tempTile = randomTiles[clickedPos];
     randomTiles[clickedPos] = randomTiles[move];
     randomTiles[move] = tempTile;
     
     // Start time elapsed if this is the first click on a new game.
-    console.log(timePass);
-    if (timePass == 0) timePass = setInterval(startTime, 1000);
+    // console.log(timePass);
+    // if (timePass == 0) timePass = setInterval(startTime, 1000);
 
     // Increment move count.
     moveTotal++
@@ -142,7 +142,13 @@ function moveTile() {
 
 function checkWin() {
 
-    if (randomTiles == tiles) alert('you a win');    
+    console.log('\ncheckWin() called.');
+
+    // Check to see if tiles are in the winning configuration.
+    var equals = (randomTiles, tiles) => JSON.stringify(randomTiles) === JSON.stringify(tiles);
+
+    if (equals(randomTiles, tiles)) { console.log('\nyou win!'); moveEl.css('background-color', 'green'); }
+    else console.log('\nnot yet');  
 }
 
 // Listen for click on any number tile.

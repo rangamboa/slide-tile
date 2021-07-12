@@ -36,7 +36,7 @@ body {
 }
 
 .tile:hover {
-    opacity: 75%;
+    background-color: #eee;
 }
 
 .blankTile {
@@ -59,13 +59,8 @@ body {
     visibility: hidden;
 }
 
-h1 {
+h1, h4 {
     letter-spacing: 1px;
-    text-align: center;
-}
-
-h4 {
-    oborder: 1px solid black;
     text-align: center;
 }
 
