@@ -4,15 +4,26 @@ var randomTiles = [];
 var moveList = [];
 var tileGrid = $('#tileCard');
 var playBtn = $('#playButton');
+var message = $('#messageBoard');
 var tileEl = $('.tile');
 var tempTile;
 var tempTiles = [];
+var timeEl = $('#timeLapse');
+var timeNow = 0;
+var timePass;
+var startTime;
+var moveEl = $('#moveCount');
+var moveTotal = 0;
 
 function initGame() {
 
     console.log('initGame() called.');
     tileGrid.css('visibility', 'visible');
+    message.html('click the tiles to put them in order');
     playBtn.html('reshuffle');
+    timeEl.html('0s');
+    moveEl.html('0');
+    clearInterval(startTime);
 
     // Set initial tile arrangement.
     tiles = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
@@ -96,6 +107,12 @@ function checkMove(clickedTile) {
     }
 }
 
+function startTime() {
+
+    timeNow++;
+    timeEl.html(timeNow + 's');
+}
+
 function moveTile() {
 
     console.log('\nmoveTile() called.');
@@ -107,6 +124,13 @@ function moveTile() {
     randomTiles[clickedPos] = randomTiles[move];
     randomTiles[move] = tempTile;
     
+    // Start time elapsed if this is the first click on a new game.
+    if (timePass == 0) timePass = setInterval(startTime, 1000);
+
+    // Increment move count.
+    moveTotal++
+    moveEl.html(moveTotal);
+
     // Redraw tiles.
     drawTiles();
 
