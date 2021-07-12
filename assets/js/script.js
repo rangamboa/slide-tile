@@ -1,6 +1,7 @@
 // Define variables.
 var tiles = [];
 var randomTiles = [];
+var moves = [];
 var tileGrid = $('#tileCard');
 var playBtn = $('#playButton');
 var tileEl = $('.tile');
@@ -50,11 +51,25 @@ function checkMove(clickedTile) {
 
     console.log('\ncheckMove() called.');
 
-    clickedPos = randomTiles.indexOf(clickedTile.toString());
+    // Get position of tile.
+    clickedPos = randomTiles.indexOf(clickedTile);
+    // console.log(clickedTile + ' has been clicked, with a position of '+ clickedPos);
 
-    console.log(clickedTile + ' has been clicked, with a position of '+ clickedPos);
+    // Generate possible moves for clicked position.
+    moveList = [[1, 3], [0, 2, 4], [1, 5], [0, 4, 6], [1, 3, 5, 7], [2, 4, 8], [3, 7], [4, 6, 8], [5, 7]]
+    
+    // console.log(moveList[clickedPos]);
+    // console.log(moveList[clickedPos].length);
 
+    for (i = 0; i < moveList[clickedPos].length; i++) {
 
+        move = moveList[clickedPos][i];
+        // console.log(move);
+        // console.log(randomTiles[move]);
+
+        if (randomTiles[move] == '0') console.log('valid move into position ' + moveList[clickedPos][i]);
+        else console.log('invalid move into position ' + moveList[clickedPos][i]);
+    }
 }
 
 
