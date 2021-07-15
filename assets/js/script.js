@@ -13,6 +13,8 @@ let timeNow = 0;
 let timePass;
 const moveEl = $('#moveCount');
 let moveTotal = 0;
+let pace;
+let paceEl = $('#paceCount');
 let newGame = false;
 let playInProg = false;
 
@@ -27,6 +29,7 @@ function initGame() {
     playBtn.html('reshuffle');
     timeEl.html('0');
     moveEl.html('0');
+    paceEl.html('-m/s');
     timeNow = 0;
     timePass = 0;
     moveTotal = 0;
@@ -55,6 +58,9 @@ function initGame() {
 function startTime() {
     timeNow++;
     timeEl.html(timeNow);
+
+    pace = Math.round(moveTotal/timeNow*100)/100;
+    paceEl.html(pace +'m/s');
 }
 
 function drawTiles() {
