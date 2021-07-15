@@ -1,5 +1,5 @@
 body {
-    background-color: #ddd;
+    background-color: rgb(57, 78, 62);
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
@@ -17,8 +17,10 @@ body {
 }
 
 #mama {
-    border: 2px solid grey;
-    filter: drop-shadow(5px 5px 20px #999);
+    border: 5px solid #333;
+    border-radius: 10px;
+    filter: drop-shadow(5px 5px 75px rgb(212, 212, 212));
+    background-color: #ddd;
 }
 
 .puzzle {
@@ -36,7 +38,7 @@ body {
     font-size: 50px;
     text-align: center;
     cursor: pointer;
-    background-color: #ddd;
+    background-color: #ccc;
 }
 
 .tile:hover {
@@ -45,7 +47,7 @@ body {
 
 
 .blankTile {
-    background-color: white;
+    background-color: #ddd;;
     border: none;
 }
 
@@ -55,13 +57,9 @@ body {
 }
 
 #tile0:hover {
-    background-color: white;
+    background-color: #ddd;
     cursor: default;
     filter: none;
-}
-
-#tileCard {
-    visibility: hidden;
 }
 
 #moveCount, #timeLapse {
@@ -84,4 +82,5 @@ h6 {
 button {
     margin: 10px auto;
     width: 95%;
+    font-style: italic;
 }

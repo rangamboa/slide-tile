@@ -16,10 +16,9 @@
 
             <h1 class="card-title pt-4">tile slide</h1>
 
-            <h6 class="card-subtitle mb-2 text-muted" id="messageBoard">click play to start the game</h6>
+            <h6 class="card-subtitle mb-2 text-muted" id="messageBoard">click play to randomize the board</h6>
 
             <div class="puzzle card-body" id="tileCard">
-                <div class="tile blankTile" id="tile0"></div>
                 <div class="tile numTile" id="tile1">1</div>
                 <div class="tile numTile" id="tile2">2</div>
                 <div class="tile numTile" id="tile3">3</div>
@@ -28,11 +27,12 @@
                 <div class="tile numTile" id="tile6">6</div>
                 <div class="tile numTile" id="tile7">7</div>
                 <div class="tile numTile" id="tile8">8</div> 
+                <div class="tile blankTile" id="tile0"></div>
             </div>
             
             <div class="puzzle card-body m-0">
-                <div class="col-6"><h4>time: <span id="timeLapse"></span></h4></div>
-                <div class="col-6"><h4>moves: <span id="moveCount"></span></h4></div>
+                <div class="col-6"><h4>time: <span id="timeLapse">--</span></h4></div>
+                <div class="col-6"><h4>moves: <span id="moveCount">--</span></h4></div>
             </div>
             
             <button class="btn btn-outline-dark" id="playButton">play</button>

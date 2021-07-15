@@ -13,15 +13,16 @@ let timeNow = 0;
 let timePass;
 const moveEl = $('#moveCount');
 let moveTotal = 0;
-let newGame;
+let newGame = false;
+let playInProg = false;
 
 function initGame() {
 
     console.log('initGame() called.');
 
     newGame = true;
+    playInProg = true;
     clearInterval(timePass);
-    tileGrid.css('visibility', 'visible');
     message.html('click the tiles to put them in order');
     playBtn.html('reshuffle');
     timeEl.html('0');
@@ -105,12 +106,14 @@ function checkMove(clickedTile) {
         // console.log(move);
         // console.log(randomTiles[move]);
 
-        // Call moveTile function if move is valid.
+        // Call moveTile function if move is valid (into blank space).
         if (randomTiles[move] == '0') {
             // console.log('valid move into position ' + move);
+            message.html('click the tiles to put them in order');
             moveTile();
         } else {
             // console.log('invalid move into position ' + move);
+            message.html('tile ' + clickedTile + ' has nowhere to move');
         }
     }
 }
@@ -144,9 +147,10 @@ function moveTile() {
     randomTiles[move] = tempTile;
     
     // Start time elapsed if this is the first click on a new game.
-    if (newGame) { 
+    if (newGame && playInProg) { 
         timePass = setInterval(startTime, 1000);
         newGame = false;
+        playInProg = true;
     }
 
     // Increment move count.
@@ -174,19 +178,23 @@ function checkWin() {
         timeEl.css('background-color', 'lightgrey');
     } else {
         console.log('not in winning configuration.');  
-        moveEl.css('background-color', 'white');
+        moveEl.css('background-color', '#ddd');
     }
 }
 
 // Listen for click on any number tile.
 tileEl.on('click', function(event) {
 
-    // Extract number on tile.
-    clickedTile = event.target.textContent;
+    // Do nothing if play button has not been pressed.
+    if (playInProg == false) return;
+    else {
+        // Extract number on tile.
+        clickedTile = event.target.textContent;
 
-    // Do nothing if the blank tile is checked; otherwise check if tile can move.
-    if (clickedTile == 0) return;
-    else checkMove(clickedTile);
+        // Do nothing if the blank tile is checked; otherwise check if tile can move.
+        if (clickedTile == 0) return;
+        else checkMove(clickedTile);
+    }
 
 });
 
