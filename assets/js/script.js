@@ -1,24 +1,26 @@
 // Define variables.
-var tiles = [];
-var randomTiles = [];
-var moveList = [];
-var tileGrid = $('#tileCard');
-var playBtn = $('#playButton');
-var message = $('#messageBoard');
-var tileEl = $('.tile');
-var tempTile;
-var tempTiles = [];
-var timeEl = $('#timeLapse');
-var timeNow = 0;
-var timePass = 0;
-var startTime;
-var moveEl = $('#moveCount');
-var moveTotal = 0;
+let tiles = [];
+let randomTiles = [];
+let moveList = [];
+const tileGrid = $('#tileCard');
+const playBtn = $('#playButton');
+const message = $('#messageBoard');
+const tileEl = $('.tile');
+let tempTile;
+let tempTiles = [];
+const timeEl = $('#timeLapse');
+let timeNow = 0;
+let timePass;
+const moveEl = $('#moveCount');
+let moveTotal = 0;
+let newGame;
 
 function initGame() {
 
     console.log('initGame() called.');
 
+    newGame = true;
+    clearInterval(timePass);
     tileGrid.css('visibility', 'visible');
     message.html('click the tiles to put them in order');
     playBtn.html('reshuffle');
@@ -27,8 +29,7 @@ function initGame() {
     timeNow = 0;
     timePass = 0;
     moveTotal = 0;
-    clearInterval(startTime);
-
+    
     // Set initial tile arrangement.
     tiles = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
     randomTiles = [];
@@ -48,6 +49,11 @@ function initGame() {
 
     // Call function to draw grid.
     drawTiles();
+}
+
+function startTime() {
+    timeNow++;
+    timeEl.html(timeNow);
 }
 
 function drawTiles() {
@@ -86,7 +92,7 @@ function checkMove(clickedTile) {
     clickedPos = randomTiles.indexOf(clickedTile);
     // console.log(clickedTile + ' has been clicked, with a position of '+ clickedPos);
 
-    // Generate array of possible moves for clicked position.
+    // Generate array of possible valid moves for clicked position.
     moveList = [[1, 3], [0, 2, 4], [1, 5], [0, 4, 6], [1, 3, 5, 7], [2, 4, 8], [3, 7], [4, 6, 8], [5, 7]];
     
     // console.log(moveList[clickedPos]);
@@ -109,18 +115,28 @@ function checkMove(clickedTile) {
     }
 }
 
-function startTime() {
-
-    timeNow++;
-    timeEl.html(timeNow);
-}
-
 function moveTile() {
 
     console.log('\nmoveTile() called.');
 
-    // console.log('position to move from: ' + clickedPos);
-    // console.log('position to move to: ' + move);
+    // Work in progress for animating tile movement.
+
+    // // console.log('position to move from: ' + clickedPos);
+    // // console.log('position to move to: ' + move);
+
+    // direction = Math.abs(clickedPos - move);
+    // console.log(direction);
+    // // If direction = 1, tile movement is left or right.
+    // // If direction = 3, tile movement is up or down.
+
+    // if (direction == 1) {
+    //     // Move left.
+    //     if (clickedPos > move) {
+    //         // console.log(clickedTile);
+    //         for (let i = 90; i > 0; i--) console.log(i)
+    //     }
+    //     // Move right.
+    // } else {}
 
     // Move selected array element into new position.
     tempTile = randomTiles[clickedPos];
@@ -128,12 +144,16 @@ function moveTile() {
     randomTiles[move] = tempTile;
     
     // Start time elapsed if this is the first click on a new game.
-    // console.log(timePass);
-    // if (timePass == 0) timePass = setInterval(startTime, 1000);
+    if (newGame) { 
+        timePass = setInterval(startTime, 1000);
+        newGame = false;
+    }
 
     // Increment move count.
     moveTotal++
     moveEl.html(moveTotal);
+
+    console.log('move: ' + moveTotal);
 
     // Redraw tiles.
     drawTiles();
@@ -147,8 +167,15 @@ function checkWin() {
     // Check to see if tiles are in the winning configuration.
     var equals = (randomTiles, tiles) => JSON.stringify(randomTiles) === JSON.stringify(tiles);
 
-    if (equals(randomTiles, tiles)) { console.log('\nyou win!'); moveEl.css('background-color', 'green'); }
-    else console.log('\nnot yet');  
+    if (equals(randomTiles, tiles)) {
+        console.log('in winning configuration!');
+        moveEl.css('background-color', 'lightgreen');
+        clearInterval(timePass);
+        timeEl.css('background-color', 'lightgrey');
+    } else {
+        console.log('not in winning configuration.');  
+        moveEl.css('background-color', 'white');
+    }
 }
 
 // Listen for click on any number tile.
